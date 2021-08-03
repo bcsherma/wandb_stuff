@@ -4,6 +4,10 @@ wandb/
 data/
 # Ignore vscode
 .vscode/
+# Ignore pytorch lightning checkpoints
+checkpoints/
+models/
+lightning_logs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
