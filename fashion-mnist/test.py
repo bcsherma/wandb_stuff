@@ -22,7 +22,7 @@ if __name__ == "__main__":
     net = model.FashionMNISTCNN.load_from_checkpoint(artifact_dir + "/model.ckpt")
     trans = transforms.Compose([transforms.ToTensor(), transforms.Normalize(0.5, 0.5)])
     test_set = datasets.FashionMNIST("./data/", download=True, transform=trans, train=0)
-    test_loader = utils.data.DataLoader(test_set, batch_size=512)
+    test_loader = utils.data.DataLoader(test_set, batch_size=512, num_workers=8)
     test_accuracy = pl.metrics.Accuracy()
     trainer = pl.Trainer(gpus=1)
     trainer.test(net, test_loader)
