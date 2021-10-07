@@ -2,6 +2,7 @@
 wandb/
 # Ignore data
 data/
+artifacts/
 # Ignore vscode
 .vscode/
 # Ignore pytorch lightning checkpoints
