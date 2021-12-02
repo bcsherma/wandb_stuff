@@ -3,7 +3,6 @@ import numpy as np
 import tensorflow as tf
 import time
 import argparse
-from wandb.keras import WandbCallback
 
 TABLE_COLUMNS = ["image", "label", "prediction"]
 TABLE_COLUMNS.extend([f"score_{i}" for i in range(10)])
