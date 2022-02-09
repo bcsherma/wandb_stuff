@@ -1,7 +1,7 @@
+import numpy as np
+import tensorflow as tf
 import wandb
 from wandb.keras import WandbCallback
-import tensorflow as tf
-import numpy as np
 
 DEFAULT_CONFIG = {
     "layer_1": 512,
@@ -32,10 +32,10 @@ def build_model(config):
 
 
 def main():
-    with wandb.init(config=DEFAULT_CONFIG, job_type="train") as run:
+    with wandb.init(config=DEFAULT_CONFIG, sync_tensorboard=True, job_type="train") as run:
         data_artifact = run.use_artifact("mnist-data:latest")
         train_data = np.load(data_artifact.get_path("train").download())
-        val_data = np.load(data_artifact.get_path("train").download())
+        val_data = np.load(data_artifact.get_path("validation").download())
         model = build_model(run.config)
         logging_callback = WandbCallback(save_model=False)
         model.fit(
@@ -44,7 +44,7 @@ def main():
             epochs=run.config.epoch,
             batch_size=run.config.batch_size,
             validation_data=(val_data["x"], val_data["y"]),
-            callbacks=[logging_callback],
+            callbacks=[logging_callback, tf.keras.callbacks.TensorBoard()],
         )
         model.save("model.keras")
         model_artifact = wandb.Artifact("mnist-model", "model", metadata=dict(run.config))

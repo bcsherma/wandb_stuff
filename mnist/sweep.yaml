@@ -9,6 +9,7 @@ parameters:
   layer_1:
     values: [256, 512]
   dropout:
+    distribution: uniform
     min: 0.1
     max: 0.5
   activation_1:

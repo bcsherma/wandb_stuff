@@ -1,7 +1,6 @@
 import wandb
 import numpy as np
 import tensorflow as tf
-import time
 import argparse
 
 TABLE_COLUMNS = ["image", "label", "prediction"]
@@ -17,12 +16,10 @@ def build_pred_table(dataset, logits):
 
 
 def main():
-    
     parser = argparse.ArgumentParser()
     parser.add_argument("model", help="model artifact to be evaluated")
     parser.add_argument("dataset", help="dataset to evaluate model on")
     args = parser.parse_args()
-    
     with wandb.init(job_type="evaluate") as run:
         model_artifact = run.use_artifact(args.model)
         data_artifact = run.use_artifact(args.dataset)
