@@ -22,6 +22,7 @@ def main():
     args = parser.parse_args()
     with wandb.init(job_type="evaluate") as run:
         model_artifact = run.use_artifact(args.model)
+        run.config.update(model_artifact.metadata)
         data_artifact = run.use_artifact(args.dataset)
         model = tf.keras.models.load_model(model_artifact.get_path("model").download())
         test_data = np.load(data_artifact.get_path("test").download())
