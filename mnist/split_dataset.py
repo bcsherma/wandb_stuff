@@ -16,6 +16,11 @@ def main():
             "mnist-data",
             "dataset",
             description=f"MNIST data loaded via tensorflow {tf.__version__}",
+            metadata={
+                "train_examples": len(y_train),
+                "validation_examples": len(y_val),
+                "test_examples": len(y_test)
+            }
         )
         for name, ds in zip(names, datasets):
             fname = f"{name}.npz"
