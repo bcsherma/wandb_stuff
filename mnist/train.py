@@ -32,7 +32,7 @@ def build_model(config):
 
 
 def main():
-    with wandb.init(config=DEFAULT_CONFIG, sync_tensorboard=True, job_type="train") as run:
+    with wandb.init(config=DEFAULT_CONFIG, job_type="train") as run:
         data_artifact = run.use_artifact("mnist-data:latest")
         train_data = np.load(data_artifact.get_path("train").download())
         val_data = np.load(data_artifact.get_path("validation").download())
