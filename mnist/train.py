@@ -44,7 +44,7 @@ def main():
             epochs=run.config.epoch,
             batch_size=run.config.batch_size,
             validation_data=(val_data["x"], val_data["y"]),
-            callbacks=[logging_callback, tf.keras.callbacks.TensorBoard()],
+            callbacks=[logging_callback],
         )
         model.save("model.keras")
         model_artifact = wandb.Artifact("mnist-model", "model", metadata=dict(run.config))
