@@ -1,4 +1,10 @@
+# See https://docs.wandb.ai/guides/sweeps/configuration
 program: train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}
 method: random
 metric:
   name: val_loss
